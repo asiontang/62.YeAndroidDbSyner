@@ -30,6 +30,7 @@ namespace YeAndroidDbSyner
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnDownload = new System.Windows.Forms.Button();
             this.btnUpload = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,7 +44,10 @@ namespace YeAndroidDbSyner
             this.lblInfo = new System.Windows.Forms.Label();
             this.txbDeviceInfo = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.nudWaitTime = new System.Windows.Forms.NumericUpDown();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.cbbPcPath = new YEControl.YESelectPathBox_XML();
+            ((System.ComponentModel.ISupportInitialize)(this.nudWaitTime)).BeginInit();
             this.SuspendLayout();
             // 
             // btnDownload
@@ -54,6 +58,7 @@ namespace YeAndroidDbSyner
             this.btnDownload.Size = new System.Drawing.Size(75, 32);
             this.btnDownload.TabIndex = 0;
             this.btnDownload.Text = "↓";
+            this.toolTip1.SetToolTip(this.btnDownload, "将设备上的数据库Copy到电脑上");
             this.btnDownload.UseVisualStyleBackColor = true;
             this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
@@ -122,6 +127,7 @@ namespace YeAndroidDbSyner
             this.btnRefresh.Size = new System.Drawing.Size(42, 32);
             this.btnRefresh.TabIndex = 5;
             this.btnRefresh.Text = "☯";
+            this.toolTip1.SetToolTip(this.btnRefresh, "刷新");
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
@@ -196,6 +202,25 @@ namespace YeAndroidDbSyner
             this.label5.TabIndex = 11;
             this.label5.Text = "设备信息：";
             // 
+            // nudWaitTime
+            // 
+            this.nudWaitTime.Location = new System.Drawing.Point(14, 110);
+            this.nudWaitTime.Maximum = new decimal(new int[] {
+            60000,
+            0,
+            0,
+            0});
+            this.nudWaitTime.Name = "nudWaitTime";
+            this.nudWaitTime.Size = new System.Drawing.Size(52, 21);
+            this.nudWaitTime.TabIndex = 12;
+            this.toolTip1.SetToolTip(this.nudWaitTime, "读取数据的超时时间[毫秒]");
+            this.nudWaitTime.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudWaitTime.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
             // cbbPcPath
             // 
             this.cbbPcPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -211,6 +236,7 @@ namespace YeAndroidDbSyner
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(396, 194);
+            this.Controls.Add(this.nudWaitTime);
             this.Controls.Add(this.txbDeviceInfo);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.cbbPcPath);
@@ -227,9 +253,10 @@ namespace YeAndroidDbSyner
             this.Controls.Add(this.label5);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Android数据库同步工具[By:AsionTang v150424.002]";
+            this.Text = "Android数据库同步工具[By:AsionTang v150424.003]";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.nudWaitTime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -251,6 +278,8 @@ namespace YeAndroidDbSyner
         private Label lblInfo;
         private TextBox txbDeviceInfo;
         private Label label5;
+        private NumericUpDown nudWaitTime;
+        private ToolTip toolTip1;
     }
 }
 

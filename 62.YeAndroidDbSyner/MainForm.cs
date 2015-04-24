@@ -16,7 +16,12 @@ namespace YeAndroidDbSyner
         {
             ReadConfig();
 
-            GetInfo();
+            cbbPcPath.Text = mConfig[IndexOfPcPath];
+            if (!string.IsNullOrEmpty(mConfig[IndexOfWaitTime]))
+                nudWaitTime.Value = Convert.ToInt32(mConfig[IndexOfWaitTime]);
+
+            //马上启动的话，减慢了界面打开速度。
+            //GetInfo();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -25,6 +30,7 @@ namespace YeAndroidDbSyner
             mConfig[IndexOfPackages] = Convert.ToString(cbbPackage.SelectedItem);
             mConfig[IndexOfDbNames] = Convert.ToString(cbbDbName.SelectedItem);
             mConfig[IndexOfPcPath] = Convert.ToString(cbbPcPath.Text);
+            mConfig[IndexOfWaitTime] = nudWaitTime.Value.ToString();
 
             SaveConfig();
 
@@ -149,7 +155,6 @@ namespace YeAndroidDbSyner
                 cbbDevices.SelectedItem = mConfig[IndexOfDevices];
                 cbbPackage.SelectedItem = mConfig[IndexOfPackages];
                 cbbDbName.SelectedItem = mConfig[IndexOfDbNames];
-                cbbPcPath.Text = mConfig[IndexOfPcPath];
             }
             finally
             {
@@ -168,20 +173,26 @@ namespace YeAndroidDbSyner
         private const int IndexOfPackages = 1;
         private const int IndexOfDbNames = 2;
         private const int IndexOfPcPath = 3;
-        private string[] mConfig = new[] { "", "", "", "" };
+        private const int IndexOfWaitTime = 4;
+        private string[] mConfig = new[] { "", "", "", "", "" };
         private readonly string mConfigPath = Application.ExecutablePath.ToLower().Replace(".exe", ".ini");
         private void ReadConfig()
         {
             if (!File.Exists(mConfigPath))
                 return;
             mConfig = File.ReadAllLines(mConfigPath);
-            if (mConfig == null || mConfig.Length != 4)
-                mConfig = new[] { "", "", "", "" };
+            if (mConfig == null || mConfig.Length != 5)
+                mConfig = new[] { "", "", "", "", "" };
         }
         private void SaveConfig()
         {
             File.WriteAllLines(mConfigPath, mConfig);
         }
         #endregion
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            ProcessHelper.WaitTime = (int)nudWaitTime.Value;
+        }
     }
 }

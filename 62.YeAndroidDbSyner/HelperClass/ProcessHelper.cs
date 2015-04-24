@@ -40,6 +40,11 @@ namespace YeAndroidDbSyner
         }
 
         /// <summary>
+        /// 读取数据的时候等待时间，等待时间过短时，可能导致读取不出正确的数据。
+        /// </summary>
+        public static int WaitTime = 50;
+
+        /// <summary>
         /// 连续运行模式，支持打开某程序后，持续向其输入命令，直到结束。
         /// </summary>
         /// <param name="exePath"></param>
@@ -69,7 +74,7 @@ namespace YeAndroidDbSyner
                         p.StandardInput.WriteLine(moreArgs[i] + '\r');
 
                         //必须等待一定时间，让程序运行一会儿，马上读取会读出空的值。
-                        Thread.Sleep(50);
+                        Thread.Sleep(WaitTime);
 
                         result.MoreOutputString.Add(i, ReadStandardOutputLine(p));
                     }
