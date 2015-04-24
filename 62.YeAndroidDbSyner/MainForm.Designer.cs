@@ -107,7 +107,7 @@ namespace YeAndroidDbSyner
             this.cbbDevices.FormattingEnabled = true;
             this.cbbDevices.Location = new System.Drawing.Point(72, 6);
             this.cbbDevices.Name = "cbbDevices";
-            this.cbbDevices.Size = new System.Drawing.Size(265, 20);
+            this.cbbDevices.Size = new System.Drawing.Size(312, 20);
             this.cbbDevices.TabIndex = 3;
             this.cbbDevices.SelectedIndexChanged += new System.EventHandler(this.cbbDevices_SelectedIndexChanged);
             // 
@@ -136,7 +136,7 @@ namespace YeAndroidDbSyner
             this.cbbPackage.FormattingEnabled = true;
             this.cbbPackage.Location = new System.Drawing.Point(72, 52);
             this.cbbPackage.Name = "cbbPackage";
-            this.cbbPackage.Size = new System.Drawing.Size(265, 20);
+            this.cbbPackage.Size = new System.Drawing.Size(312, 20);
             this.cbbPackage.TabIndex = 1;
             this.cbbPackage.SelectedIndexChanged += new System.EventHandler(this.cbbPackage_SelectedIndexChanged);
             // 
@@ -160,7 +160,7 @@ namespace YeAndroidDbSyner
             this.cbbDbName.FormattingEnabled = true;
             this.cbbDbName.Location = new System.Drawing.Point(72, 78);
             this.cbbDbName.Name = "cbbDbName";
-            this.cbbDbName.Size = new System.Drawing.Size(265, 20);
+            this.cbbDbName.Size = new System.Drawing.Size(312, 20);
             this.cbbDbName.TabIndex = 6;
             this.cbbDbName.SelectedIndexChanged += new System.EventHandler(this.cbbDbName_SelectedIndexChanged);
             // 
@@ -171,17 +171,19 @@ namespace YeAndroidDbSyner
             this.lblInfo.ForeColor = System.Drawing.Color.Red;
             this.lblInfo.Location = new System.Drawing.Point(12, 169);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(325, 23);
+            this.lblInfo.Size = new System.Drawing.Size(372, 23);
             this.lblInfo.TabIndex = 9;
             this.lblInfo.Text = "Info";
             this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txbDeviceInfo
             // 
+            this.txbDeviceInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txbDeviceInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txbDeviceInfo.Location = new System.Drawing.Point(72, 32);
             this.txbDeviceInfo.Name = "txbDeviceInfo";
-            this.txbDeviceInfo.Size = new System.Drawing.Size(265, 14);
+            this.txbDeviceInfo.Size = new System.Drawing.Size(312, 14);
             this.txbDeviceInfo.TabIndex = 10;
             this.txbDeviceInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -201,14 +203,14 @@ namespace YeAndroidDbSyner
             this.cbbPcPath.ControlLogKey = "Pc_Path";
             this.cbbPcPath.Location = new System.Drawing.Point(72, 142);
             this.cbbPcPath.Name = "cbbPcPath";
-            this.cbbPcPath.Size = new System.Drawing.Size(265, 20);
+            this.cbbPcPath.Size = new System.Drawing.Size(312, 20);
             this.cbbPcPath.TabIndex = 8;
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(349, 194);
+            this.ClientSize = new System.Drawing.Size(396, 194);
             this.Controls.Add(this.txbDeviceInfo);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.cbbPcPath);
@@ -223,9 +225,9 @@ namespace YeAndroidDbSyner
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label5);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Android数据库同步工具[By:AsionTang 1.0]";
+            this.Text = "Android数据库同步工具[By:AsionTang v150424.002]";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
