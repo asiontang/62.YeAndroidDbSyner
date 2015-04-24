@@ -116,11 +116,18 @@ namespace YeAndroidDbSyner
                     p.StartInfo.Arguments = args;
                     p.Start();
 
+                    //获取正常信息
+                    if (p.StandardOutput.Peek() > -1)
+                        result.OutputString = p.StandardOutput.ReadToEnd();
+
+                    //获取错误信息
+                    if (p.StandardError.Peek() > -1)
+                        result.OutputString = p.StandardError.ReadToEnd();
+
                     // Do not wait for the child process to exit before
                     // reading to the end of its redirected stream.
                     // p.WaitForExit();
                     // Read the output stream first and then wait.
-                    result.OutputString = p.StandardOutput.ReadToEnd();
                     p.WaitForExit();
 
                     result.ExitCode = p.ExitCode;

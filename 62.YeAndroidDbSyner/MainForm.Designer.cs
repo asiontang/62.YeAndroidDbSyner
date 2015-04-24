@@ -52,6 +52,7 @@ namespace YeAndroidDbSyner
             // 
             // btnDownload
             // 
+            this.btnDownload.Enabled = false;
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDownload.Location = new System.Drawing.Point(72, 104);
             this.btnDownload.Name = "btnDownload";
@@ -174,6 +175,7 @@ namespace YeAndroidDbSyner
             // 
             this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblInfo.AutoEllipsis = true;
             this.lblInfo.ForeColor = System.Drawing.Color.Red;
             this.lblInfo.Location = new System.Drawing.Point(12, 169);
             this.lblInfo.Name = "lblInfo";
@@ -253,7 +255,7 @@ namespace YeAndroidDbSyner
             this.Controls.Add(this.label5);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Android数据库同步工具[By:AsionTang v150424.003]";
+            this.Text = "Android数据库同步工具[By:AsionTang v150424.004]";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.nudWaitTime)).EndInit();

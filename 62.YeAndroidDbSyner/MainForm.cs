@@ -93,6 +93,10 @@ namespace YeAndroidDbSyner
                 else
                     ShowInfo("下载执行失败！");
             }
+            catch (Exception ex)
+            {
+                ShowInfo(ex.Message);
+            }
             finally
             {
                 Cursor.Current = Cursors.Default;
@@ -112,6 +116,7 @@ namespace YeAndroidDbSyner
 
         private void GetInfo()
         {
+            btnDownload.Enabled = false;
             Cursor.Current = Cursors.WaitCursor;
             ShowInfo("获取信息中···");
             try
@@ -155,6 +160,8 @@ namespace YeAndroidDbSyner
                 cbbDevices.SelectedItem = mConfig[IndexOfDevices];
                 cbbPackage.SelectedItem = mConfig[IndexOfPackages];
                 cbbDbName.SelectedItem = mConfig[IndexOfDbNames];
+
+                btnDownload.Enabled = true;
             }
             finally
             {

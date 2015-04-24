@@ -190,20 +190,28 @@ namespace YeAndroidDbSyner
             if (!Path.HasExtension(devPath))
                 tmpPathInDevice += ".db";
 
-            var moreArgs = new[] { "su", string.Format("cat {0} > {1}", devPath, tmpPathInDevice), "exit", "exit" };
+            var moreArgs = new[] { "su"
+                , string.Format("cat {0} > {1}", devPath, tmpPathInDevice)
+                , string.Format("chmod 777 {0}",  tmpPathInDevice)//必须设置足够的权限才能正常pull出来。
+                , "exit", "exit" };
+
             var result = ProcessHelper.RunAsContinueMode(AdbExePath, string.Format("-s {0} shell", deviceNo), moreArgs);
             if (!result.Success)
                 return false;
 
             //使用Pull命令将数据库拷贝到Pc上
             //adb pull [-p] [-a] <remote> [<local>]
-            result = ProcessHelper.Run(AdbExePath, string.Format("pull {0} {1}", tmpPathInDevice, pcPath));
+            result = ProcessHelper.Run(AdbExePath, string.Format("-s {0} pull {1} {2}", deviceNo, tmpPathInDevice, pcPath));
 
-            //假如成功则自动删除设备上临时文件
-            if (result.Success)
-                ProcessHelper.Run(AdbExePath, string.Format("shell rm {0}", tmpPathInDevice));
+            //自动删除设备上临时文件
+            ProcessHelper.Run(AdbExePath, string.Format("-s {0} shell rm {1}", deviceNo, tmpPathInDevice));
 
-            return result.Success;
+            if (!result.Success
+                || result.ExitCode != 0
+                || (result.OutputString != null && result.OutputString.Contains("failed")))
+                throw new Exception("pull 执行返回的结果异常：" + result.OutputString);
+
+            return true;
         }
 
         #region 获取设备相关信息
