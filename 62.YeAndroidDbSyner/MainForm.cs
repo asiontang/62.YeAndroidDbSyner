@@ -110,13 +110,41 @@ namespace YeAndroidDbSyner
 
         private void btnUpload_Click(object sender, EventArgs e)
         {
-
+            if (Directory.Exists(cbbPcPath.Text))
+                openFileDialog1.InitialDirectory = cbbPcPath.Text;
+            openFileDialog1.FileName = Convert.ToString(cbbDbName.SelectedItem);
+            if (openFileDialog1.ShowDialog() != DialogResult.OK)
+                return;
+            if (!File.Exists(openFileDialog1.FileName))
+            {
+                ShowInfo("选择的文件不存在！");
+                return;
+            }
+            Cursor.Current = Cursors.WaitCursor;
+            ShowInfo(null);
+            try
+            {
+                var devPath = string.Format("/data/data/{0}/databases/{1}", cbbPackage.SelectedItem, cbbDbName.SelectedItem);
+                if (AdbHelper.CopyToDevice(Convert.ToString(cbbDevices.SelectedItem), openFileDialog1.FileName, devPath))
+                    ShowInfo("上传成功。");
+                else
+                    ShowInfo("上传失败！");
+            }
+            catch (Exception ex)
+            {
+                ShowInfo(ex.Message);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
 
 
         private void GetInfo()
         {
             btnDownload.Enabled = false;
+            btnUpload.Enabled = false;
             Cursor.Current = Cursors.WaitCursor;
             ShowInfo("获取信息中···");
             try
@@ -162,6 +190,7 @@ namespace YeAndroidDbSyner
                 cbbDbName.SelectedItem = mConfig[IndexOfDbNames];
 
                 btnDownload.Enabled = true;
+                btnUpload.Enabled = true;
             }
             finally
             {

@@ -46,6 +46,7 @@ namespace YeAndroidDbSyner
             this.label5 = new System.Windows.Forms.Label();
             this.nudWaitTime = new System.Windows.Forms.NumericUpDown();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.cbbPcPath = new YEControl.YESelectPathBox_XML();
             ((System.ComponentModel.ISupportInitialize)(this.nudWaitTime)).BeginInit();
             this.SuspendLayout();
@@ -58,7 +59,7 @@ namespace YeAndroidDbSyner
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Size = new System.Drawing.Size(75, 32);
             this.btnDownload.TabIndex = 0;
-            this.btnDownload.Text = "↓";
+            this.btnDownload.Text = "↓(&D)";
             this.toolTip1.SetToolTip(this.btnDownload, "将设备上的数据库Copy到电脑上");
             this.btnDownload.UseVisualStyleBackColor = true;
             this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
@@ -67,11 +68,11 @@ namespace YeAndroidDbSyner
             // 
             this.btnUpload.Enabled = false;
             this.btnUpload.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnUpload.Location = new System.Drawing.Point(261, 104);
+            this.btnUpload.Location = new System.Drawing.Point(308, 104);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(75, 32);
             this.btnUpload.TabIndex = 0;
-            this.btnUpload.Text = "↑";
+            this.btnUpload.Text = "↑(&U)";
             this.btnUpload.UseVisualStyleBackColor = true;
             this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
@@ -123,11 +124,11 @@ namespace YeAndroidDbSyner
             this.btnRefresh.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnRefresh.Font = new System.Drawing.Font("宋体", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnRefresh.Location = new System.Drawing.Point(183, 104);
+            this.btnRefresh.Location = new System.Drawing.Point(179, 104);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(42, 32);
+            this.btnRefresh.Size = new System.Drawing.Size(97, 32);
             this.btnRefresh.TabIndex = 5;
-            this.btnRefresh.Text = "☯";
+            this.btnRefresh.Text = "刷新(&R)";
             this.toolTip1.SetToolTip(this.btnRefresh, "刷新");
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
@@ -223,6 +224,10 @@ namespace YeAndroidDbSyner
             0});
             this.nudWaitTime.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.Filter = "DB文件(*.db)|*.db|DB3文件(*.db3)|*.db3|所有文件(*.*)|*.*";
+            // 
             // cbbPcPath
             // 
             this.cbbPcPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -255,7 +260,7 @@ namespace YeAndroidDbSyner
             this.Controls.Add(this.label5);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Android数据库同步工具[By:AsionTang v150424.004]";
+            this.Text = "Android数据库同步工具[By:AsionTang v150428.005]";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.nudWaitTime)).EndInit();
@@ -282,6 +287,7 @@ namespace YeAndroidDbSyner
         private Label label5;
         private NumericUpDown nudWaitTime;
         private ToolTip toolTip1;
+        private OpenFileDialog openFileDialog1;
     }
 }
 

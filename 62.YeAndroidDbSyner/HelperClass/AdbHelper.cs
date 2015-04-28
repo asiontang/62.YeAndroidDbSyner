@@ -214,6 +214,29 @@ namespace YeAndroidDbSyner
             return true;
         }
 
+        public static bool CopyToDevice(string deviceNo, string pcPath, string devPath)
+        {
+            var tmpPathInDevice = string.Format("/data/local/tmp/{0}", Path.GetFileName(pcPath));
+
+            //adb push [-p] <local> <remote> 
+            //- copy file/dir to device
+            var result = ProcessHelper.Run(AdbExePath, string.Format("-s {0} push {1} {2}", deviceNo, pcPath, tmpPathInDevice));
+            if (!result.Success
+                || result.ExitCode != 0
+                || (result.OutputString != null && result.OutputString.Contains("failed")))
+                throw new Exception("push 执行返回的结果异常：" + result.OutputString);
+
+            var moreArgs = new[] { "su"
+                , string.Format("cat {0} > {1}", tmpPathInDevice,devPath)
+                , "exit", "exit" };
+
+            result = ProcessHelper.RunAsContinueMode(AdbExePath, string.Format("-s {0} shell", deviceNo), moreArgs);
+            if (!result.Success)
+                throw new Exception("复制文件异常：" + result.MoreOutputString[1]);
+
+            return true;
+        }
+
         #region 获取设备相关信息
         /// <summary>
         /// -s 0123456789ABCDEF shell getprop ro.product.brand
