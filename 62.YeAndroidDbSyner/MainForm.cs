@@ -67,6 +67,23 @@ namespace YeAndroidDbSyner
                 , AdbHelper.GetDeviceModel(deviceNo)
                 , AdbHelper.GetDeviceVersionRelease(deviceNo)
                 , AdbHelper.GetDeviceVersionSdk(deviceNo));
+
+            //遍历指定目录
+            var dataFolderList = AdbHelper.ListDataFolder(deviceNo);
+            if (dataFolderList.Count == 0)
+            {
+                ShowInfo("遍历Data目录失败！");
+                return;
+            }
+
+            //反转顺序，将系统的报名排到最后面
+            dataFolderList.Reverse();
+
+            cbbPackage.Items.Clear();
+            cbbPackage.Items.AddRange(dataFolderList.ToArray());
+            cbbPackage.SelectedItem = mConfig[IndexOfPackages];
+
+            ShowInfo("信息获取完毕。");
         }
 
         private void cbbDbName_SelectedIndexChanged(object sender, EventArgs e)
@@ -166,29 +183,13 @@ namespace YeAndroidDbSyner
 
                 cbbDevices.Items.Clear();
                 cbbDevices.Items.AddRange(devs);
-                cbbDevices.SelectedIndex = 0;
-
-                //遍历指定目录
-                var dataFolderList = AdbHelper.ListDataFolder(Convert.ToString(cbbDevices.SelectedItem));
-                if (dataFolderList.Count == 0)
-                {
-                    ShowInfo("遍历Data目录失败！");
-                    return;
-                }
-
-                //反转顺序，将系统的报名排到最后面
-                dataFolderList.Reverse();
-
-                cbbPackage.Items.Clear();
-                cbbPackage.Items.AddRange(dataFolderList.ToArray());
-                cbbPackage.SelectedIndex = 0;
-
-                ShowInfo("信息获取完毕。");
-
                 cbbDevices.SelectedItem = mConfig[IndexOfDevices];
+
                 cbbPackage.SelectedItem = mConfig[IndexOfPackages];
+
                 cbbDbName.SelectedItem = mConfig[IndexOfDbNames];
 
+                ShowInfo("信息获取完毕。");
                 btnDownload.Enabled = true;
                 btnUpload.Enabled = true;
             }

@@ -111,11 +111,11 @@ namespace YeAndroidDbSyner
         /// <returns></returns>
         public static List<string> ListDataFolder(string deviceNo)
         {
-            var moreArgs = new[] { "su", "ls /data/data", "exit", "exit" };
+            var moreArgs = new[] { "su", "ls -1p /data/data", "exit", "exit" };
             var result = ProcessHelper.RunAsContinueMode(AdbExePath, string.Format("-s {0} shell", deviceNo), moreArgs);
 
             var itemsString = result.MoreOutputString[1];
-            var items = itemsString.Split(new[] { "$", "#", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            var items = itemsString.Split(new[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
             var itemsList = new List<String>();
             foreach (var item in items)
@@ -128,9 +128,12 @@ namespace YeAndroidDbSyner
                 if (string.IsNullOrEmpty(tmp))
                     continue;
                 //移除最后两行的root@android
-                if (tmp.ToLower().Contains("root@"))
+                if (tmp.ToLower().Contains("root@") || tmp.ToLower().Contains("#"))
                     continue;
-                itemsList.Add(tmp);
+                //移除非目录节点 ls -p 在目录末尾增加/
+                if (!tmp.ToLower().EndsWith("/"))
+                    continue;
+                itemsList.Add(tmp.Replace("/", ""));
             }
 
             itemsList.Sort();
@@ -146,13 +149,13 @@ namespace YeAndroidDbSyner
         /// <returns></returns>
         public static List<string> ListDatabasesFolder(string deviceNo, string packageName)
         {
-            var path = string.Format("ls /data/data/{0}/databases", packageName);
+            var path = string.Format("ls -1p /data/data/{0}/databases", packageName);
 
             var moreArgs = new[] { "su", path, "exit", "exit" };
             var result = ProcessHelper.RunAsContinueMode(AdbExePath, string.Format("-s {0} shell", deviceNo), moreArgs);
 
             var itemsString = result.MoreOutputString[1];
-            var items = itemsString.Split(new[] { "$", "#", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            var items = itemsString.Split(new[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
             var itemsList = new List<String>();
             foreach (var item in items)
@@ -165,7 +168,10 @@ namespace YeAndroidDbSyner
                 if (string.IsNullOrEmpty(tmp))
                     continue;
                 //移除最后两行的root@android
-                if (tmp.ToLower().Contains("root@"))
+                if (tmp.ToLower().Contains("root@") || tmp.ToLower().Contains("#"))
+                    continue;
+                //排除掉SQLite的日志文件.
+                if (tmp.ToLower().Contains("-journal"))
                     continue;
                 itemsList.Add(tmp);
             }

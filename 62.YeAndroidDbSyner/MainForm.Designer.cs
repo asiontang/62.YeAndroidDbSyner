@@ -260,7 +260,7 @@ namespace YeAndroidDbSyner
             this.Controls.Add(this.label5);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Android数据库同步工具[By:AsionTang v150428.005]";
+            this.Text = "Android数据库同步工具[By:AsionTang v200507.006]";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.nudWaitTime)).EndInit();
